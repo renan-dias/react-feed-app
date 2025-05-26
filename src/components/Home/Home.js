@@ -1,25 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from '../Layout/Sidebar';
 import MainContent from '../Layout/MainContent';
+import { Button } from 'react-bootstrap';
+import { List as MenuIcon } from 'react-bootstrap-icons';
 
-// Componente Home.
-// Representa a página principal da aplicação após o login do usuário.
-// É responsável por organizar o layout da página, dividindo-a em uma barra lateral (`Sidebar`)
-// e uma área de conteúdo principal (`MainContent`).
 function Home() {
-  // A estrutura `div` com a classe `app-container` serve como um container geral
-  // para aplicar estilos de layout que posicionam a `Sidebar` e o `MainContent` lado a lado.
-  // Este é um padrão comum para criar layouts de painel ou dashboard.
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  const toggleMobileSidebar = (forceState) => {
+    // Permite forçar um estado (true/false) ou apenas inverter o estado atual
+    setIsMobileSidebarOpen(prevState => typeof forceState === 'boolean' ? forceState : !prevState);
+  };
+
   return (
     <div className="app-container">
-      {/* Sidebar: Componente de navegação lateral. 
-          Contém links para diferentes seções da aplicação, perfil do usuário e botão de logout.
-          É renderizado à esquerda do conteúdo principal. */}
-      <Sidebar />
-      {/* MainContent: Componente que exibe o conteúdo principal da rota atual.
-          Por exemplo, na rota "/", ele exibe o feed de posts.
-          É renderizado à direita da Sidebar. */}
-      <MainContent />
+      {/* Botão de Menu Hamburger - visível apenas em mobile via CSS */}
+      <Button 
+        variant="primary" 
+        className="mobile-menu-button" 
+        onClick={() => toggleMobileSidebar()}
+        aria-controls="sidebar" // Para acessibilidade
+        aria-expanded={isMobileSidebarOpen} // Para acessibilidade
+      >
+        <MenuIcon size={24} />
+      </Button>
+
+      <Sidebar 
+        isMobileSidebarOpen={isMobileSidebarOpen} 
+        toggleMobileSidebar={toggleMobileSidebar} 
+      />
+      <MainContent isMobileSidebarOpen={isMobileSidebarOpen} />
+      
+      {/* Overlay para o MainContent quando a sidebar mobile estiver aberta */}
+      {isMobileSidebarOpen && <div className="main-content-overlay active" onClick={() => toggleMobileSidebar(false)}></div>}
     </div>
   );
 }
