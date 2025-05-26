@@ -5,92 +5,125 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #E8F5E9; /* Um verde bem claro para o fundo geral, ajuste conforme necessário */
+  background-color: #F0F2F5; /* Cinza claro para o fundo geral, mais neutro */
 }
 
 .app-container {
   display: flex;
   min-height: 100vh;
+  position: relative; 
 }
 
+/* Estilos da Sidebar para Desktop */
 .sidebar {
-  background-color: #C8E6C9; /* Verde claro para a sidebar */
+  background-color: #FFFFFF; 
   min-height: 100vh;
   padding-top: 1.5rem;
-  padding-left: 0;
-  padding-right: 0;
-  width: 280px; /* Largura da sidebar */
+  width: 280px; 
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 100;
+  z-index: 1000; 
+  border-right: 1px solid #DEE2E6; 
+  transition: transform 0.3s ease-in-out;
+  display: flex; 
+  flex-direction: column; 
 }
 
 .sidebar .nav-link {
-  color: #333;
+  color: #343A40; 
   padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
-  border-radius: 0.375rem; /* 6px */
+  border-radius: 0.375rem; 
   margin: 0.25rem 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease; 
 }
 
 .sidebar .nav-link svg {
-  margin-right: 0.75rem;
+  margin-right: 0.85rem; 
 }
 
 .sidebar .nav-link.active,
 .sidebar .nav-link:hover {
-  background-color: #FFFFFF;
-  color: #1B5E20; /* Verde escuro para texto ativo/hover */
+  background-color: #E9ECEF; 
+  color: #007BFF; 
   font-weight: 500;
 }
 
 .user-profile-sidebar {
-  padding: 0 1.5rem 1rem 1.5rem;
+  padding: 0 1.5rem 1.5rem 1.5rem; 
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem; 
+  border-bottom: 1px solid #DEE2E6; 
 }
 
 .user-profile-sidebar img {
-  width: 40px;
-  height: 40px;
+  width: 48px; 
+  height: 48px;
   border-radius: 50%;
-  margin-right: 0.75rem;
+  margin-right: 0.85rem; 
 }
 
 .user-profile-sidebar div strong {
    display: block;
+   font-size: 1rem; 
+   color: #343A40;
 }
 .user-profile-sidebar div span {
-  font-size: 0.8rem;
-  background-color: #4CAF50;
+  font-size: 0.75rem; 
+  background-color: #007BFF; 
   color: white;
-  padding: 0.1rem 0.4rem;
+  padding: 0.2rem 0.5rem; 
   border-radius: 0.25rem;
+  font-weight: 500;
 }
 
-.sidebar-post-button {
-    margin: 1rem;
-    margin-top: auto; /* Empurra para o final se a sidebar for flex column */
+.sidebar-post-button-container { 
+  padding: 0 1rem; 
+  margin-top: auto; 
+  padding-bottom: 1.5rem; 
 }
+
+/* .sidebar-post-button é estilizado pela classe .btn-postar mais abaixo */
 
 .main-content {
   flex-grow: 1;
   padding: 1.5rem;
-  background-color: #A5D6A7; /* Verde um pouco mais escuro para a área de conteúdo */
-  margin-left: 280px; /* Mesma largura da sidebar */
+  background-color: #F8F9FA; 
+  margin-left: 280px; 
   min-height: 100vh;
+  transition: margin-left 0.3s ease-in-out, filter 0.3s ease-in-out; 
 }
 
+/* Botão de Menu Mobile (Hamburger) */
+.mobile-menu-button {
+  display: none; 
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1050; 
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.mobile-menu-button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Estilos para .create-post-box (mesmo que obsoleto, pode ser reutilizado) */
 .create-post-box {
   background-color: white;
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
 }
 
 .create-post-box textarea {
@@ -98,11 +131,12 @@ body {
   resize: none;
   box-shadow: none !important;
   padding-left: 0;
+  font-size: 1rem; 
 }
 
 .create-post-box .user-avatar-input {
   display: flex;
-  align-items: flex-start; /* Alinha avatar no topo */
+  align-items: flex-start; 
 }
 
 .create-post-box .user-avatar-input img {
@@ -117,16 +151,17 @@ body {
   justify-content: space-between;
   align-items: center;
   padding-top: 0.5rem;
-  margin-left: 48px; /* Espaço do avatar */
+  margin-left: calc(40px + 0.75rem); 
 }
 
 .create-post-actions .icons svg {
   margin-right: 0.75rem;
   color: #6c757d;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 .create-post-actions .icons svg:hover {
-  color: #1B5E20;
+  color: #007BFF; 
 }
 
 
@@ -134,44 +169,51 @@ body {
   background-color: white;
   border-radius: 8px;
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08); 
 }
 
 .post-card .card-body {
-    padding: 1rem;
+    padding: 1.25rem; 
 }
 
 .post-header {
   display: flex;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem; 
 }
 
 .post-header img {
-  width: 40px;
-  height: 40px;
+  width: 45px; 
+  height: 45px;
   border-radius: 50%;
-  margin-right: 0.75rem;
+  margin-right: 0.85rem; 
 }
 
 .post-header .post-author {
-  font-weight: bold;
+  font-weight: 600; 
+  color: #343A40;
 }
 .post-header .post-time {
   font-size: 0.8rem;
-  color: #6c757d;
+  color: #6C757D; 
   margin-left: 0.5rem;
 }
 
 .post-content {
   margin-bottom: 1rem;
-  white-space: pre-wrap; /* Mantém quebras de linha e espaços */
+  white-space: pre-wrap; 
+  word-wrap: break-word; 
+  font-size: 0.95rem; 
+  line-height: 1.6; 
+  color: #495057; 
 }
 
 .post-actions {
   display: flex;
   align-items: center;
-  color: #6c757d;
+  color: #6C757D;
+  padding-top: 0.75rem; 
+  border-top: 1px solid #E9ECEF; 
 }
 
 .post-actions div {
@@ -179,20 +221,154 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
+  transition: color 0.2s ease;
 }
 .post-actions svg {
-  margin-right: 0.25rem;
+  margin-right: 0.35rem; 
 }
-.post-actions div:hover {
-    color: #1B5E20;
+.post-actions div:hover,
+.post-actions div.liked svg, 
+.post-actions div.liked span { 
+    color: #DC3545; 
+}
+.post-actions div.liked span {
+    font-weight: 600;
 }
 
 .btn-postar {
-    background-color: #4CAF50; /* Verde para o botão Postar */
-    border-color: #4CAF50;
+    background-color: #007BFF; 
+    border-color: #007BFF;
     color: white;
+    font-weight: 500;
+    padding: 0.5rem 1rem; 
+    font-size: 0.95rem; 
 }
 .btn-postar:hover {
-    background-color: #388E3C;
-    border-color: #388E3C;
+    background-color: #0056b3; 
+    border-color: #0056b3;
 }
+
+/* Media Queries para Responsividade */
+@media (max-width: 991.98px) { 
+  .sidebar {
+    transform: translateX(-100%); 
+  }
+
+  .sidebar.open {
+    transform: translateX(0); 
+    box-shadow: 0 0 15px rgba(0,0,0,0.2); 
+  }
+
+  .main-content {
+    margin-left: 0; 
+    padding: 1rem; 
+  }
+  
+  .main-content.sidebar-open-blur { 
+     filter: blur(3px) brightness(0.9);
+     pointer-events: none; 
+  }
+
+  .mobile-menu-button {
+    display: block; 
+  }
+  
+  .page-title {
+    font-size: 1.5rem; 
+    padding-left: 3.5rem; 
+  }
+}
+
+@media (max-width: 575.98px) { 
+  .post-card .card-body {
+    padding: 0.85rem; 
+  }
+  .post-content {
+    font-size: 0.9rem;
+  }
+  .post-actions div {
+    margin-right: 1rem; 
+  }
+
+  .create-post-actions {
+    margin-left: 0; 
+    flex-direction: column; 
+    align-items: flex-end; 
+  }
+  .create-post-actions .icons {
+    margin-bottom: 0.75rem; 
+    align-self: flex-start; 
+  }
+  .page-title {
+    font-size: 1.3rem;
+    padding-left: 3.5rem; 
+  }
+}
+
+.main-content-overlay {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 999; 
+}
+
+.main-content-overlay.active {
+  display: block;
+}
+
+/* Efeito Glassmorphism */
+.glassmorphism-effect {
+  background: rgba(255, 255, 255, 0.35); /* Opacidade ajustada para legibilidade */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Para compatibilidade com Safari */
+  border-radius: 12px; /* Bordas um pouco mais arredondadas */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
+}
+
+/* Animações e Transições Adicionais */
+
+/* Botões e Links com Hover mais pronunciado */
+.btn-postar, .mobile-menu-button, .sidebar .nav-link {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.btn-postar:hover, .mobile-menu-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar .nav-link:hover {
+  transform: translateX(3px); /* Leve deslocamento para a direita no hover */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra sutil no item da sidebar */
+}
+
+/* Animação para Post Cards */
+.post-card {
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+  animation: fadeInPost 0.5s ease-out forwards; /* Aplicar animação de fade-in */
+}
+
+.post-card:hover {
+  transform: translateY(-4px) scale(1.01); /* Leve elevação e aumento */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12); /* Sombra mais destacada no hover */
+}
+
+/* Keyframes para animação de fade-in dos posts */
+@keyframes fadeInPost {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Para aplicar a animação com delay escalonado, seria necessário JS,
+   mas a animação base será aplicada a todos os posts ao carregar. */
