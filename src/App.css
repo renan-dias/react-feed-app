@@ -1,38 +1,198 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #E8F5E9; /* Um verde bem claro para o fundo geral, ajuste conforme necessário */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-container {
   display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background-color: #C8E6C9; /* Verde claro para a sidebar */
+  min-height: 100vh;
+  padding-top: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+  width: 280px; /* Largura da sidebar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.sidebar .nav-link {
+  color: #333;
+  padding: 0.75rem 1.5rem;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  border-radius: 0.375rem; /* 6px */
+  margin: 0.25rem 1rem;
+}
+
+.sidebar .nav-link svg {
+  margin-right: 0.75rem;
+}
+
+.sidebar .nav-link.active,
+.sidebar .nav-link:hover {
+  background-color: #FFFFFF;
+  color: #1B5E20; /* Verde escuro para texto ativo/hover */
+  font-weight: 500;
+}
+
+.user-profile-sidebar {
+  padding: 0 1.5rem 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.user-profile-sidebar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.user-profile-sidebar div strong {
+   display: block;
+}
+.user-profile-sidebar div span {
+  font-size: 0.8rem;
+  background-color: #4CAF50;
   color: white;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.25rem;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar-post-button {
+    margin: 1rem;
+    margin-top: auto; /* Empurra para o final se a sidebar for flex column */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-content {
+  flex-grow: 1;
+  padding: 1.5rem;
+  background-color: #A5D6A7; /* Verde um pouco mais escuro para a área de conteúdo */
+  margin-left: 280px; /* Mesma largura da sidebar */
+  min-height: 100vh;
+}
+
+.create-post-box {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.create-post-box textarea {
+  border: none;
+  resize: none;
+  box-shadow: none !important;
+  padding-left: 0;
+}
+
+.create-post-box .user-avatar-input {
+  display: flex;
+  align-items: flex-start; /* Alinha avatar no topo */
+}
+
+.create-post-box .user-avatar-input img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.create-post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+  margin-left: 48px; /* Espaço do avatar */
+}
+
+.create-post-actions .icons svg {
+  margin-right: 0.75rem;
+  color: #6c757d;
+  cursor: pointer;
+}
+.create-post-actions .icons svg:hover {
+  color: #1B5E20;
+}
+
+
+.post-card {
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.post-card .card-body {
+    padding: 1rem;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.post-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.post-header .post-author {
+  font-weight: bold;
+}
+.post-header .post-time {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-left: 0.5rem;
+}
+
+.post-content {
+  margin-bottom: 1rem;
+  white-space: pre-wrap; /* Mantém quebras de linha e espaços */
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+}
+
+.post-actions div {
+  margin-right: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.post-actions svg {
+  margin-right: 0.25rem;
+}
+.post-actions div:hover {
+    color: #1B5E20;
+}
+
+.btn-postar {
+    background-color: #4CAF50; /* Verde para o botão Postar */
+    border-color: #4CAF50;
+    color: white;
+}
+.btn-postar:hover {
+    background-color: #388E3C;
+    border-color: #388E3C;
 }
